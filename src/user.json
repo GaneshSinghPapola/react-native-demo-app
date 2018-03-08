@@ -1,6 +1,9 @@
 [
-  {name:'ganesh singh',email:'ganesh@gmail.com',password:'12345'},
-{name:'ganesh singh',email:'ganesh1@gmail.com',password:'12345'},
-{name:'ganesh singh',email:'ganesh2@gmail.com',password:'12345'},
-{name:'ganesh singh',email:'ganesh3@gmail.com',password:'12345'}
+  {name:'ganesh singh', age:25, tags:[]},
+  {name:'praksh', age:25, tags:[]},
+  {name:'vijay', age:25, tags:[]},
+  {name:'lucky', age:25, tags:[]},
+  {name:'ashish', age:25, tags:[]},
+  {name:'deepak', age:25, tags:[]},
+  {name:'test', age:25, tags:["music"]}
 ]

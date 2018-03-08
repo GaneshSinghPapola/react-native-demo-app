@@ -1,4 +1,4 @@
-const users = (state = {login:[],signup:[]}, action) => {
+const users = (state = { login : null, signup: null, allUsers: null, listData: null}, action) => {
   switch (action.type) {
     case 'LOGIN':
     return {
@@ -13,6 +13,15 @@ const users = (state = {login:[],signup:[]}, action) => {
       return {
         allUsers:action.allUsers
       }
+
+      case 'GET_DATA':
+
+      return {
+        ...state,
+        listData:action.listData
+      }
+      
+      
     default:
       return state
   }

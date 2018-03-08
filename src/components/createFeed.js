@@ -10,9 +10,30 @@ import {
   FlatList,
   TouchableOpacity
 } from "react-native";
+import {get_data} from '../actions';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux'
 
-export default class UserLocation extends Component {
+class UserLocation extends Component {
+  constructor(props){
+    super(props);
+    // this.props.
+  }
+
+  componentWillMount(){
+    this.props.get_data()
+  }
+
+  componentWillReceiveProps(Props){
+    // alert(JSON.stringify(Props.users))
+  }
+
+  componentDidMount(){
+    
+  }
+
   render() {
+    alert(typeof this.props.users)
     return (
       <View style={styles.flexBody}>
         <Image
@@ -28,34 +49,45 @@ export default class UserLocation extends Component {
         </TouchableOpacity>
 
         <View style={styles.flexSection}>
-          <View style={styles.container}>
-            <Image
-              source={require("../assets/images/cover.png")}
-              style={styles.photo}
-            />
-            <Text style={styles.text}>sadas dasda</Text>
-          </View>
 
-          <View style={styles.container}>
+          {  
+            
+              this.props.users ?
+                <FlatList
+                  numColumns={3}
+                  scrollEnabled={false}
+                  data={this.props.users}
+                  keyExtractor={item => item.id}
+                  renderItem={({ item, index }) => {
+                    alert('in the list ', item)
+                    return (
+                      <View style={styles.container}>
             <Image
               source={require("../assets/images/cover.png")}
               style={styles.photo}
             />
             <Text style={styles.text}>sadas dasda</Text>
           </View>
+                    )
+                  }}
+                />
+                : null
+            
 
-          <View style={styles.container}>
-            <Image
-              source={require("../assets/images/cover.png")}
-              style={styles.photo}
-            />
-            <Text style={styles.text}>sadas dasda</Text>
-          </View>
+            
+
+        }
+
+         
+
+          
+
         </View>
       </View>
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   cover: { height: 200, width: 420 },
@@ -89,3 +121,14 @@ const styles = StyleSheet.create({
     borderRadius: 100
   }
 });
+function mapStateToProps(state) {
+  return {
+     users : state.users.listData
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ get_data }, dispatch);
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserLocation);

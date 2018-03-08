@@ -13,9 +13,16 @@ import {
   Dimensions,
   TouchableHighlight
 } from "react-native";
-import { Badge, Icon, Button, Container } from "native-base";
-const { height: WINDOW_HEIGHT, width: WINDOW_WIDTH } = Dimensions.get("window");
+import {connect} from 'react-redux';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import ImagePicker from "react-native-image-picker";
+import {save_data} from '../actions'
+
+import { Badge, Icon, Button, Container } from "native-base";
+
+const { height,width } = Dimensions.get("window");
+
+
 
 const imagePickerOptions = {
   title: "Select Avatar",
@@ -26,7 +33,7 @@ const imagePickerOptions = {
   }
 };
 
-export default class UserLocation extends Component {
+class createFeedForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -101,12 +108,21 @@ export default class UserLocation extends Component {
     user.name = this.state.name;
     user.age = this.state.age;
     this.setState({user:user});
+    this.props.save_data(this.state.user);
 
   }
 
+  // createFeed
+componentWillReceiveProps(Props){
+  alert('form ')
+}
+componentDidMount(){
+    
+}
+
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: "white" }}>
+      <KeyboardAwareScrollView style={{ height :height*1  , backgroundColor: "white" }}>
         <View style={{ flex: 0.3, flexDirection: "row" }}>
           <TouchableOpacity
             style={{ marginTop: 30 }}
@@ -261,7 +277,7 @@ export default class UserLocation extends Component {
             </Button>
           </Container>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     );
   }
 }
@@ -282,3 +298,18 @@ const styles = StyleSheet.create({
     borderRadius: 200
   }
 });
+
+
+
+const mapStateToProps = state =>({
+  users: state.allUsers
+})
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      
+  }
+}
+
+
+export default connect (mapStateToProps, {save_data})(createFeedForm)
