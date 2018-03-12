@@ -26,7 +26,6 @@ const { height,width } = Dimensions.get("window");
 
 const imagePickerOptions = {
   title: "Select Avatar",
-  customButtons: [{ name: "fb", title: "Choose Photo from Facebook" }],
   storageOptions: {
     skipBackup: true,
     path: "images"
@@ -74,6 +73,7 @@ class createFeedForm extends Component {
         this.setState({
           avatar: source
         });
+        // alert(this.state.avatar.uri)
       }
     });
   }
@@ -109,12 +109,13 @@ class createFeedForm extends Component {
     user.age = this.state.age;
     this.setState({user:user});
     this.props.save_data(this.state.user);
+    Actions.createFeed();
 
   }
 
   // createFeed
 componentWillReceiveProps(Props){
-  alert('form ')
+
 }
 componentDidMount(){
     
@@ -133,7 +134,7 @@ componentDidMount(){
               source={
                 this.state.avatar.type === "file"
                   ? this.state.avatar.require
-                  : this.state.avatar.uri
+                  : this.state.avatar.uri.uri
               }
               style={styles.userImage}
             />
@@ -266,6 +267,10 @@ componentDidMount(){
                   </Badge>
                 );
               })}
+
+              
+
+
             </View>
           </View>
         </View>

@@ -5,16 +5,34 @@ import { Icon, Container, Header, Content, Card, CardItem, Thumbnail, Text, Butt
 import {Avatar,SearchBar} from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
+import {get_data} from '../actions';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux'
+
 import user from '../assets/images/addUser.png';
 import bgSrc from '../assets/images/searchUser.png';
 
-export default class AddUser extends Component {
+ class AddUser extends Component {
 
     constructor(props) {
       super(props);
-      
+      this.state = {
+          filteredUser:[]
+      }
     }
-   
+
+    componentWillMount(){
+        this.props.get_data()
+      }
+
+
+    _handleSearch(search){
+
+
+const data = this.props.users.filter(item=>{return item.name.toLowerCase() === search.toLowerCase()});
+this.setState({filteredUser:data})
+
+    }
     render() {
       
       return (
@@ -24,7 +42,9 @@ export default class AddUser extends Component {
                 <SearchBar
                     lightTheme
                     icon={{ type: 'font-awesome', name: 'search' }}
-                    placeholder='Type Here...' />
+                    placeholder='Type Here...' 
+                    onChangeText = {(search)=> this._handleSearch(search)}  />
+                  
             </View>
             <View style={{flex:0.4, padding:10, flexDirection:'column',backgroundColor:"white"}}>
             <TouchableOpacity>
@@ -53,7 +73,7 @@ export default class AddUser extends Component {
                 <Text>Add new person</Text>
             </View>
             </View>
-            <Icon name='add-circle' style={{fontSize: 50, color: 'steelblue', left:300,top:5}} />
+            
         </View>
         </KeyboardAwareScrollView>
         
@@ -79,3 +99,15 @@ export default class AddUser extends Component {
 
       }
   });
+
+  function mapStateToProps(state) {
+    return {
+       users : state.users.listData
+    };
+  }
+  function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ get_data }, dispatch);
+  }
+  
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(AddUser);

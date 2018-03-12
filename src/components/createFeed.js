@@ -33,7 +33,6 @@ class UserLocation extends Component {
   }
 
   render() {
-    alert(typeof this.props.users)
     return (
       <View style={styles.flexBody}>
         <Image
@@ -59,14 +58,14 @@ class UserLocation extends Component {
                   data={this.props.users}
                   keyExtractor={item => item.id}
                   renderItem={({ item, index }) => {
-                    alert('in the list ', item)
+
                     return (
                       <View style={styles.container}>
             <Image
               source={require("../assets/images/cover.png")}
               style={styles.photo}
             />
-            <Text style={styles.text}>sadas dasda</Text>
+            <Text style={styles.text}>{item.name}</Text>
           </View>
                     )
                   }}

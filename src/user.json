@@ -1,9 +1,9 @@
 [
   {name:'ganesh singh', age:25, tags:[]},
-  {name:'praksh', age:25, tags:[]},
-  {name:'vijay', age:25, tags:[]},
-  {name:'lucky', age:25, tags:[]},
-  {name:'ashish', age:25, tags:[]},
-  {name:'deepak', age:25, tags:[]},
-  {name:'test', age:25, tags:["music"]}
+  {name:'praksh mittal', age:25, tags:[]},
+  {name:'vijay kumar', age:25, tags:[]},
+  {name:'lucky ali', age:25, tags:[]},
+  {name:'ashish kumar', age:25, tags:[]},
+  {name:'deepak shah', age:25, tags:[]},
+  {name:'test test', age:25, tags:["music"]}
 ]
